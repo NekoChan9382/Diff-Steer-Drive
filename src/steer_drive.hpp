@@ -1,5 +1,5 @@
-#ifndef DIFF_STEER_HPP
-#define DIFF_STEER_HPP
+#ifndef STEER_DRIVE_HPP
+#define STEER_DRIVE_HPP
 
 // #include "mbed.h"
 #include "coordinate.hpp"
@@ -8,32 +8,32 @@
 
 namespace bit {
 
-struct DiffSteerValue
+struct SteerValue
 {
     float vel;
     float theta;
 
-    DiffSteerValue(const float& vel, const float& theta)
+    SteerValue(const float& vel, const float& theta)
     : vel(vel), theta(theta) {}
 
-    explicit DiffSteerValue(const CoordinatePolar& other) noexcept
+    explicit SteerValue(const CoordinatePolar& other) noexcept
     {
         vel = other.r;
         theta = other.theta;
     }
 
-    explicit DiffSteerValue(const Coordinate& other) noexcept
+    explicit SteerValue(const Coordinate& other) noexcept
     {
-        DiffSteerValue(static_cast<CoordinatePolar>(other));
+        SteerValue(static_cast<CoordinatePolar>(other));
     }
 };
 
 template<int N>
-class DiffSteer
+class SteerDrive
 {
     static_assert(N > 0, "N must be positive");
 public:
-    DiffSteer(const float& robot_radius) : robot_radius_(robot_radius)
+    SteerDrive(const float& robot_radius) : robot_radius_(robot_radius)
     {
         for (int i = 0; i < N; ++i)
         {
@@ -43,7 +43,7 @@ public:
         }
     }
 
-    DiffSteer(const std::array<Coordinate, N>& wheel_pos)
+    SteerDrive(const std::array<Coordinate, N>& wheel_pos)
     {
         for (int i = 0; i < N; ++i)
         {
@@ -51,7 +51,7 @@ public:
         }
     }
 
-    std::array<DiffSteerValue, N> calc_vel(const Velocity& vel)
+    std::array<SteerValue, N> calc_vel(const Velocity& vel)
     {
         std::array<DiffSteerValue, N> value;
         for (int i; i<N; ++i)

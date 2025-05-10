@@ -1,5 +1,5 @@
 #include "coordinate.hpp"
-#include "diff_steer.hpp"
+#include "steer_drive.hpp"
 #include <iostream>
 #include <cmath>
 #include "mbed.h"
@@ -9,7 +9,7 @@ int main()
     bit::Coordinate p{0.0f, 1.0f, 0.0f};
     bit::Coordinate q{1.0f, 0.0f, 0.0f};
 
-    bit::DiffSteer<4>(1);
+    bit::SteerDrive<4>(1);
 
     // bit::CoordinatePolar a = p;
     // q *= 2;
