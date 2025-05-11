@@ -53,14 +53,14 @@ public:
 
     std::array<SteerValue, N> calc_vel(const Velocity& vel)
     {
-        std::array<DiffSteerValue, N> value;
+        std::array<SteerValue, N> value;
         for (int i; i<N; ++i)
         {
             CoordinatePolar pos = static_cast<CoordinatePolar>(wheel_pos_[i]);
             convert_ang(pos, 0);
             const Velocity tmp = {vel.x + pos.r * vel.ang * cos(pos.ang),
                                     vel.y + pos.r * vel.ang * cos(pos.ang)};
-            value[i] = static_cast<DiffSteerValue>(tmp);
+            value[i] = static_cast<SteerValue>(tmp);
         }
         return value;
     }

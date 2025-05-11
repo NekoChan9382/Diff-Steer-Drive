@@ -22,6 +22,8 @@ class Pid
 public:
     Pid(const PidParameter parameter) : _parameter(parameter), _pre_error(0), _integral(0) {}
 
+    Pid() : _parameter{PidGain{0, 0, 0}, 0, 0}, _pre_error(0), _integral(0) {}
+    
     float calc(const float goal, const float actual, const float dt_sec)
     {
         float error = goal - actual;
